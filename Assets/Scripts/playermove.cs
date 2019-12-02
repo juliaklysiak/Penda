@@ -21,24 +21,22 @@ public class playermove : MonoBehaviour {
 	void Update () {
         if (IsDeath)
             return;
-
     
         moveVector = Vector3.zero;
 
-        if(controller.isGrounded)
-        { verticalVelocity = -0.5f;
-        }
-        else
-        {
-            verticalVelocity -= gravity * Time.deltaTime;
-        }
-
         // x- right and left
-        moveVector.x = Input.GetAxisRaw("Horizontal") * speed;
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            moveVector.x = transform.position.x - 100f;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            moveVector.x = transform.position.x + 100f;
+        }
         // z- forward and backward
         moveVector.z = speed;
         //Y - up and down
-        moveVector.y = verticalVelocity;
+        moveVector.y = 0;
         
         controller.Move (moveVector * Time.deltaTime);
 	}

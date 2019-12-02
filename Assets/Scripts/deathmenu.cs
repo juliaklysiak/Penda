@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class deathmenu : MonoBehaviour {
     public Text scoretext;
     public Image backgroundImg;
-    private bool isShowned = false;
+   
     private float transition = 0.0f;
 
 	// Use this for initialization
@@ -17,16 +17,14 @@ public class deathmenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isShowned)
-            return;
-        transition += Time.deltaTime;
-        backgroundImg.color = Color.Lerp(new Color(0, 0, 0, 0), Color.black, transition);
+       
+        
 	}
     public void ToggleEndMenu(float score)
     {
         gameObject.SetActive(true);
         scoretext.text = ((int)score).ToString();
-        isShowned = true;
+        
     }
     public void Restart()
     {
