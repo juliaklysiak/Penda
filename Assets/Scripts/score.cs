@@ -13,6 +13,7 @@ public class score : MonoBehaviour {
     private int scoreToNextLevel = 10;
 
     private bool isDead = false;
+    public deathmenu deathMenu;
 
     // Use this for initialization
     void Start() {
@@ -43,6 +44,7 @@ public class score : MonoBehaviour {
    public void OnDeath()
     {
        isDead = true;
+        deathMenu.ToggleEndMenu(scoree);
     }
 
 }
