@@ -1,19 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playermove : MonoBehaviour {
     private CharacterController controller;
-    private float speed = 10.0f;
     private Vector3 moveVector;
     private float verticalVelocity = 0.0f;
     private float gravity = 12.0f;
+    public float speed = 10.0f;
+    public int healthpoints;
+
+    public Text healthText;
 
     private bool IsDeath = false;
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
+        switch(PlayerPrefs.GetInt("CharacterSelected"))
+        {
+            case 1:
+                speed = 10f;
+                healthpoints = 3;
+                break;
+            case 2:
+                speed = 5f;
+                healthpoints = 1;
+                break;
+            case 3:
+                speed = 15f;
+                healthpoints = 5;
+                break;
+        }
 
 	}
 	
@@ -21,7 +40,8 @@ public class playermove : MonoBehaviour {
 	void Update () {
         if (IsDeath)
             return;
-    
+
+        healthText.text = "Lives: " + healthpoints;
         moveVector = Vector3.zero;
 
         // x- right and left
@@ -42,27 +62,38 @@ public class playermove : MonoBehaviour {
 	}
     public void SetSpeed(float modifier)
     {
-        speed = 10.0f + modifier;
+        speed = speed + modifier;
     }
     private void OnTriggerEnter (Collider other)
     {
         if (other.transform.gameObject.tag == "Obstacle")
         {
             Destroy(other.gameObject);
+            healthpoints--;
+
+            if (healthpoints<=0)
             Death();
         }
         if (other.transform.gameObject.tag == "doubleObstacle")
         {
             Destroy(other.gameObject);
-            Death();
+            healthpoints -= 2; ;
+            if (healthpoints <= 0)
+                Death();
         }
         if (other.transform.gameObject.tag == "gold")
         {
-         // slowly
+            // slowly
+            Destroy(other.transform.gameObject);
+            speed = speed/1.5f;
+
         }
         if (other.transform.gameObject.tag == "silver")
         {
             // add lifes
+            Destroy(other.transform.gameObject);
+            healthpoints++;
+
         }
     }
     private void Death()
