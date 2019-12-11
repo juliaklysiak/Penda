@@ -46,8 +46,24 @@ public class playermove : MonoBehaviour {
     }
     private void OnTriggerEnter (Collider other)
     {
-        Destroy(other.gameObject) ; 
-             Death ();
+        if (other.transform.gameObject.tag == "Obstacle")
+        {
+            Destroy(other.gameObject);
+            Death();
+        }
+        if (other.transform.gameObject.tag == "doubleObstacle")
+        {
+            Destroy(other.gameObject);
+            Death();
+        }
+        if (other.transform.gameObject.tag == "gold")
+        {
+         // slowly
+        }
+        if (other.transform.gameObject.tag == "silver")
+        {
+            // add lifes
+        }
     }
     private void Death()
     {
