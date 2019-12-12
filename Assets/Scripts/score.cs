@@ -28,7 +28,7 @@ public class score : MonoBehaviour {
             LevelUp();
         scoree += Time.deltaTime * difficultyLeve;
         scoreText.text = ((int)scoree).ToString();
-
+        
     }
     void LevelUp()
     {
@@ -44,6 +44,8 @@ public class score : MonoBehaviour {
    public void OnDeath()
     {
        isDead = true;
+        if(PlayerPrefs.GetFloat("Highscore") < scoree)
+        PlayerPrefs.SetFloat("Highscore", scoree);
         deathMenu.ToggleEndMenu(scoree);
     }
 

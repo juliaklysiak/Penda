@@ -20,15 +20,15 @@ public class playermove : MonoBehaviour {
         controller = GetComponent<CharacterController>();
         switch(PlayerPrefs.GetInt("CharacterSelected"))
         {
-            case 1:
+            case 0:
                 speed = 10f;
                 healthpoints = 3;
                 break;
-            case 2:
+            case 1:
                 speed = 5f;
                 healthpoints = 1;
                 break;
-            case 3:
+            case 2:
                 speed = 15f;
                 healthpoints = 5;
                 break;
@@ -45,11 +45,12 @@ public class playermove : MonoBehaviour {
         moveVector = Vector3.zero;
 
         // x- right and left
-        if(Input.GetKeyDown(KeyCode.A))
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetMouseButtonDown(0)) && Input.mousePosition.x < Screen.width / 2)
         {
             moveVector.x = transform.position.x - 100f;
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetMouseButtonDown(0)) && Input.mousePosition.x > Screen.width / 2)
+
         {
             moveVector.x = transform.position.x + 100f;
         }
