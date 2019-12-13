@@ -45,11 +45,11 @@ public class playermove : MonoBehaviour {
         moveVector = Vector3.zero;
 
         // x- right and left
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetMouseButtonDown(0)) && Input.mousePosition.x < Screen.width / 2)
+        if ((Input.GetKeyDown(KeyCode.A) || (Input.GetMouseButtonDown(0)) && Input.mousePosition.x < Screen.width / 2))
         {
             moveVector.x = transform.position.x - 100f;
         }
-        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetMouseButtonDown(0)) && Input.mousePosition.x > Screen.width / 2)
+        else if ((Input.GetKeyDown(KeyCode.D) || (Input.GetMouseButtonDown(0)) && Input.mousePosition.x > Screen.width / 2))
 
         {
             moveVector.x = transform.position.x + 100f;
